@@ -11,7 +11,13 @@ const getAllProducts = async () => {
 }
 
 const getSingleProduct = async (id) => {
-  return;
+  try {
+    const singleProduct = await Product.findOne({ where: { id } });
+    return singleProduct;
+  } catch (error) {
+    console.log('Error while fetching a single Product', error);
+    throw new Error('Error while fetching a single Product');
+  }
 }
 
 const createNewProduct = async (data) => {
@@ -30,11 +36,23 @@ const createNewProduct = async (data) => {
 }
 
 const updateProduct = async (id, data) => {
-  return
+  try {
+    const updatedProduct = await Product.update(data, { where: { id } });
+    return updatedProduct;
+  } catch (error) {
+    console.log('Error while updating a Product', error);
+    throw new Error('Error while updating a Product');
+  }
 }
 
 const deleteProduct = async (id) => {
-  return;
+  try {
+    const deletedProduct = await Product.destroy({ where: { id } });
+    return deletedProduct;
+  } catch (error) {
+    console.log('Error while deleting a Product', error);
+    throw new Error('Error while deleting a Product');
+  }
 }
 
 module.exports = {
